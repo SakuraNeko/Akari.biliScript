@@ -26,6 +26,9 @@ Akari.Display.Effects.TrackMatte = function( params )
   var layerCanvas = Akari.Display.Sprite();
   layerCanvas.addChild( params.layer.source );
   layerCanvas.addChild( params.mask.source );
+  var canvasMask = params.mask.clone();
+  layerCanvas.addChild( canvasMask.source );
+  layerCanvas.mask = canvasMask.source;
   canvas.addChild( layerCanvas );
   params.layer.source = canvas;
 

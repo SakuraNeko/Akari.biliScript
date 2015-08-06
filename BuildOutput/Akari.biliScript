@@ -1,5 +1,5 @@
-/* Akari.biliScript - v20140710 
- * Copyright (C) 2014 
+/* Akari.biliScript - v20150806 
+ * Copyright (C) 2015 
  * <https://github.com/akaza-akari/Akari.biliScript>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -2106,7 +2106,7 @@ Akari.Animation.WiggleKeyframes = function( params )
       var randVector = rng.vector( origin.length );
       
       // Scale vector to fit amount constraint
-      var scaledVector = Akari.Utilities.Vector.scale( randVector, params.amount / vectorLength( randVector ) );
+      var scaledVector = Akari.Utilities.Vector.scale( randVector, params.amount / Akari.Utilities.Vector.length( randVector ) );
       
       return Akari.Utilities.Vector.add( origin, scaledVector );
     }
@@ -2789,6 +2789,9 @@ Akari.Display.Effects.TrackMatte = function( params )
   var layerCanvas = Akari.Display.Sprite();
   layerCanvas.addChild( params.layer.source );
   layerCanvas.addChild( params.mask.source );
+  var canvasMask = params.mask.clone();
+  layerCanvas.addChild( canvasMask.source );
+  layerCanvas.mask = canvasMask.source;
   canvas.addChild( layerCanvas );
   params.layer.source = canvas;
 
