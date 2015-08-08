@@ -376,6 +376,28 @@ Akari.Utilities.Factory =
   }
 };
 
+/* Class Modifier: Clonable
+ * Wraps around a constructor to enable better clone behavior.
+ */
+
+Akari.Utilities.Clonable = function ( ctor )
+{
+  return function ()
+  {
+    var origArgs = [].slice.apply( arguments, [ 0 ] );
+    var args = origArgs;
+    var wrap = function ()
+    {
+      var obj = ctor.apply( this, args );
+      obj.clone = wrap;
+      args = Akari.Utilities.Factory.clone( origArgs );
+      return obj;
+    };
+    return wrap();
+  };
+};
+
+
 /* Static Class: Timer
  * Improves timing precision over Player.time by sampling time usage for each frame. For retaining both smoothness and seekability.
  */
