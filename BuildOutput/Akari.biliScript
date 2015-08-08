@@ -1,4 +1,4 @@
-/* Akari.biliScript - v20150806 
+/* Akari.biliScript - v20150808 
  * Copyright (C) 2015 
  * <https://github.com/akaza-akari/Akari.biliScript>
  *
@@ -2814,6 +2814,7 @@ Akari.Display.Effects.TrackMatte = function( params )
   {
     baseUpdate( time );
     params.mask.update( time );
+    canvasMask.update( time );
 
     params.mask.source.blendMode = "alpha";
     canvas.blendMode = params.layer.source.blendMode;

@@ -41,6 +41,7 @@ Akari.Display.Effects.TrackMatte = function( params )
   {
     baseUpdate( time );
     params.mask.update( time );
+    canvasMask.update( time );
 
     params.mask.source.blendMode = "alpha";
     canvas.blendMode = params.layer.source.blendMode;
