@@ -591,6 +591,7 @@ Akari.Display.Anchor = function( params )
   return sprite;
 };
 
+
 /* Class: Anchor3D
  * Anchors the layer source at a specific point in 3D space
  *
@@ -616,6 +617,59 @@ Akari.Display.Anchor3D = function( params )
   params.source.z = - ( params.z || 0 );
   
   return sprite;
+};
+
+/* Class: AnchorProvider
+ * Anchors the provider at a specific point
+ *
+ * provider
+ *   The DynamicLayerSourceProvider to wrap around
+ * x
+ *   [default] source.width / 2
+ *   Anchor X.
+ * y
+ *   [default] source.height / 2
+ *   Anchor Y.
+ */
+Akari.Display.AnchorProvider = function( params )
+{
+  return {
+    startTime: params.provider.startTime,
+    duration: params.provider.duration,
+    canvas: Akari.Display.Anchor({ source : params.provider.canvas, x : params.x, y : params.y }),
+    update: function( time )
+    {
+      return params.provider.update( time );
+    }
+  };
+};
+
+/* Class: AnchorProvider3D
+ * Anchors the provider at a specific point in 3D space
+ *
+ * provider
+ *   The DynamicLayerSourceProvider to wrap around
+ * x
+ *   [default] source.width / 2
+ *   Anchor X.
+ * y
+ *   [default] source.height / 2
+ *   Anchor Y.
+ * z
+ *   [default] 0
+ *   Anchor Z.
+ */
+Akari.Display.AnchorProvider3D = function( params )
+{
+  return {
+    startTime: params.provider.startTime,
+    duration: params.provider.duration,
+    canvas: Akari.Display.Anchor3D({ source : params.provider.canvas, x : params.x, y : params.y, z : params.z }),
+    update: function( time )
+    {
+      return params.provider.update( time );
+    }
+  };
 };
 
 /* Class: Checkerboard
